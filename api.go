@@ -223,7 +223,9 @@ func (a *API) ReadResponseHeader(httpHeader http.Header) error {
 		if key == "" {
 			continue
 		}
-		a.ResponseHeaders[key] = values[1]
+		v := strings.Replace(values[1], " ", "", -1)
+		v = strings.Replace(v, "\r", "", -1)
+		a.ResponseHeaders[key] = v
 	}
 	return nil
 }
